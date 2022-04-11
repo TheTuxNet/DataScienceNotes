@@ -20,11 +20,15 @@ The Transformation process, on the other hand, can be divided into further sub-p
 ## Jupyter Pandas Cheat Sheet
 ### Introduction
 > import pandas as pd
+>
 > import numpy as np
 
 > #import csv-File in dataframe df
+>
 > df = pd.read_csv('path_to/input.csv' ,sep=",") 
+>
 > df
 
 > #export dataframe df to csv file my-data
+>
 > df.to_csv ('path_to/output.csv' , index = False, header=True) 
