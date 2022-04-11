@@ -1,5 +1,35 @@
 # Jupyter Pandas Cheat Sheet
 
+## What is Jupyter-Notebook?
+
+Jupyter Notebook is one of the most widely used tool in data science that use Python. This is due to the fact that it is an ideal environment for developing reproducible data analysis pipelines with Python.
+Data can be loaded, transformed, and modeled all inside a single Notebook, where it’s quick and easy to test out code and explore ideas along the way.
+In addition, inline-formatted text lets you take notes to better document and share your work.
+
+![Intro](img/intro.png)
+
+
+## What is Pandas?
+Pandas is a widely used open source Python library for data science, data analysis, and machine learning tasks. It is built on top of Numpy, the fundamental package for scientific computing in Python. Pandas, as one of the most popular data wrangling packages, integrates well with many other Python data science packages and is normally included in every Python distribution.
+
+In our examples we will use the Anaconda distribution, which is the easiest to install and best integrated together with the KNIME Analytics Platform.
+Why Jupyter-Notebook, Python and Pandas?
+
+As I explained in my previous articles, every data engineer should learn a visual programming language like KNIME. The reason for that is that the best representation of an ETL pipeline is a visual workflow:
+
+Why every Data Engineer should learn a Visual Programming Language like KNIME
+Learn a visual programming language like KNIME if you want to be successful in data engineering or even as a business…
+medium.com
+
+So why learn Python and Pandas when 99% of your data engineering tasks can be solved with KNIME or any other visual programming ETL tool?
+One reason is that sometimes you need to perform complex calculations.
+
+Python already provides very sophisticated libraries and packages for this.
+On the other hand, it is possible to use code from Jupyter directly in KNIME.
+
+![Intro1](img/intro_01.png)
+
+That’s why we want to learn the most essential commands in Python and Pandas to be able to perform the most important ETL processes in Jupyter-Notebook.
 
 ## ETL-Process
 ETL (extract, transform, load) is a type of data integration that refers to the three phases (extract, transform, and load) that are used to combine data from various sources. Data is extracted from one or different source systems, transformed into an analyzeable format, and loaded into a data warehouse or other system throughout this process.
