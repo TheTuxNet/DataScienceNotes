@@ -1,0 +1,410 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title></title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style2.css">
+</head><body><h1>Jupyter Pandas Cheat Sheet</h1>
+<h2>What is Jupyter-Notebook?</h2>
+<p>Jupyter Notebook is one of the most widely used tool in data science that use Python. This is due to the fact that it is an ideal environment for developing reproducible data analysis pipelines with Python.
+Data can be loaded, transformed, and modeled all inside a single Notebook, where it's quick and easy to test out code and explore ideas along the way.
+In addition, inline-formatted text lets you take notes to better document and share your work.</p>
+<p><img src="img/intro.png" alt="Intro" /></p>
+<h2>What is Pandas?</h2>
+<p>Pandas is a widely used open source Python library for data science, data analysis, and machine learning tasks. It is built on top of Numpy, the fundamental package for scientific computing in Python. Pandas, as one of the most popular data wrangling packages, integrates well with many other Python data science packages and is normally included in every Python distribution.</p>
+<p>In our examples we will use the Anaconda distribution, which is the easiest to install and best integrated together with the KNIME Analytics Platform.
+Why Jupyter-Notebook, Python and Pandas?</p>
+<p>As I explained in my previous articles, every data engineer should learn a visual programming language like KNIME. The reason for that is that the best representation of an ETL pipeline is a visual workflow:</p>
+<p><img src="img/intro_01.png" alt="Intro1" /></p>
+<p>So why learn Python and Pandas when 99% of your data engineering tasks can be solved with KNIME or any other visual programming ETL tool?
+One reason is that sometimes you need to perform complex calculations.</p>
+<p>Python already provides very sophisticated libraries and packages for this.
+On the other hand it is possible to use code from Jupyter directly in KNIME.</p>
+<p>That's why we want to learn the most essential commands in Python and Pandas to be able to perform the most important ETL processes in Jupyter-Notebook.</p>
+<h2>ETL-Process</h2>
+<p>ETL (extract, transform, load) is a type of data integration that refers to the three phases (extract, transform, and load) that are used to combine data from various sources. Data is extracted from one or different source systems, transformed into an analyzeable format, and loaded into a data warehouse or other system throughout this process.</p>
+<p><img src="img/etl_01.png" alt="ETL Process" /></p>
+<p>The ETL process consists of three main basic components:
+Input -&gt; Transform -&gt; Output</p>
+<p>The task of the Input is to load different data source types into the processing tool.
+At the Output, the processed data is exported back to other databases, systems, or files.
+The Transformation process, on the other hand, can be divided into further sub-processes, which essentially consist of the following components:</p>
+<ul>
+<li>Filtering columns or rows</li>
+<li>Transforming columns or rows with mathematical or text functions</li>
+<li>Aggregate and reshape (groupby and pivoting)</li>
+<li>Combining (join and concatenate)</li>
+</ul>
+<h2>Jupyter Pandas Cheat Sheet</h2>
+<h3>Introduction</h3>
+<p>In this section we call the two main Python packages pandas and numpy.
+To refer to the functions and objects of the packages, we add the corisponding aliases pd and np at the end.</p>
+<blockquote>
+<p>import pandas as pd</p>
+<p>import numpy as np</p>
+</blockquote>
+<p>Then we read the csv file &quot;input&quot; in the dataframe &quot;df&quot; and output it with &quot;df&quot;.
+Importing a csv-File input.csv in a dataframe df</p>
+<blockquote>
+<p>df = pd.read_csv('path_to/input.csv' ,sep=&quot;,&quot;)
+print(df)</p>
+</blockquote>
+<p>Finally we export the dataframe &quot;df&quot; as csv file with the name &quot;output.csv&quot;.</p>
+<blockquote>
+<p>df.to_csv ('path_to/output.csv' , index = False, header=True)</p>
+</blockquote>
+<h3>Exploring Data</h3>
+<p>It is always good to get a quick insight about the data.</p>
+<p>Various commands are available to show the data in the dataframe &quot;df&quot; from different angles.</p>
+<blockquote>
+<p>df.head()       # first five rows</p>
+</blockquote>
+<blockquote>
+<p>df.tail()       # last five rows</p>
+</blockquote>
+<blockquote>
+<p>df.sample(5)    # random sample of rows</p>
+</blockquote>
+<blockquote>
+<p>df.shape        # number of rows/columns</p>
+</blockquote>
+<blockquote>
+<p>df.describe()   # calculates measures of central tendency</p>
+</blockquote>
+<blockquote>
+<p>df.info()       # memory footprint and datatypes</p>
+</blockquote>
+<h3>Statistics</h3>
+<p>The following commands cover the most common statistics functions:</p>
+<blockquote>
+<p>df.describe() # Summary statistics for numerical columns</p>
+</blockquote>
+<blockquote>
+<p>df.mean() # Returns the mean of all columns</p>
+</blockquote>
+<blockquote>
+<p>df.corr() # Returns the correlation between columns in a DataFrame</p>
+</blockquote>
+<blockquote>
+<p>df.count() # Returns the number of non-null values in each DataFrame column</p>
+</blockquote>
+<blockquote>
+<p>df.max()  # Returns the highest value in each column</p>
+</blockquote>
+<blockquote>
+<p>df.min() # Returns the lowest value in each column</p>
+</blockquote>
+<blockquote>
+<p>df.median() # Returns the median of each column</p>
+</blockquote>
+<blockquote>
+<p>df.std() # Returns the standard deviation of each column</p>
+</blockquote>
+<h3>Import Data from Files</h3>
+<p>In the most cases you want to import data from a csv file or an Excel file.
+The name of the csv file is definied by my-data.csv. Rename the file to your needs. The same applies to the import of Excel files.</p>
+<h4>Import csv</h4>
+<blockquote>
+<p>df = pd.read_csv('Data/my-data.csv' ,sep=&quot;,&quot;)</p>
+</blockquote>
+<h4>Import xls</h4>
+<blockquote>
+<p>df = pd.read_excel('Data/my-data.xlsx')</p>
+<p>df = pd.read_excel('Data/my-data.xlsx',
+sheetname='sheet1',
+skiprows=[1] # header data
+)</p>
+</blockquote>
+<p>If you want to import a specific Excel sheet, rename &quot;sheet1&quot; with the desired sheet-name. You may also skip the first x rows with skiprows=[1]. Change &quot;1&quot; with the desired number of rows.</p>
+<h3>Export Data to files</h3>
+<p>The data in a dataframe can be easily exported to an Excel file or a csv file.</p>
+<h4>Export xls</h4>
+<blockquote>
+<p>df.to_excel('Data/my-data.xlsx')</p>
+</blockquote>
+<h4>Export csv</h4>
+<blockquote>
+<p>df.to_csv ('Data/my-data.csv' , index = False, header=True)</p>
+</blockquote>
+<h3>Column manipulation</h3>
+<p>Dataframes can be modified by manipulating columns in different ways.
+The following codes show how to filter the desired columns or how to rename them</p>
+<h4>Column Filter</h4>
+<blockquote>
+<p>df[['Title','Rating']]</p>
+</blockquote>
+<blockquote>
+<p>df.filter(['Title','Rating'])</p>
+</blockquote>
+<h4>Column Rename</h4>
+<blockquote>
+<p>df.rename(columns={'Title': 'a', 'Rating': 'c'},inplace=True)</p>
+</blockquote>
+<p>Rename the columns back</p>
+<blockquote>
+<p>df.rename(columns={'a': 'Title', 'c': 'Rating'},inplace=True)</p>
+</blockquote>
+<h4>Column Resorter/Reorder</h4>
+<blockquote>
+<p>df.columns.values # show column values</p>
+</blockquote>
+<p>Reorder Rating after Title</p>
+<blockquote>
+<p>df[['Title', 'Rating','Genre', 'Description', 'Director', 'Actors', 'Year',
+'Runtime (Minutes)',  'Votes', 'Revenue (Millions)',
+'Metascore']]</p>
+</blockquote>
+<p>Constant Value Column</p>
+<blockquote>
+<p>df['new_column'] = 23
+df.head()</p>
+</blockquote>
+<p>Math Formula</p>
+<blockquote>
+<p>df['Rating_Votes'] = df.Rating + df.Votes
+df[['Rating_Votes','Rating','Votes']].head()</p>
+</blockquote>
+<p>Changing the type of a column from integer to string is a common task in data engineering. With &quot;astype&quot; you can change from number to string, from string to number or from number to double:</p>
+<p>Number to String</p>
+<blockquote>
+<p>df['Year_str'] =df['Year'].astype(str)
+df.info()</p>
+</blockquote>
+<p>String to Number</p>
+<blockquote>
+<p>df['Year_int'] =df['Year_str'].astype(int)
+df.info()</p>
+</blockquote>
+<p>Double to Int</p>
+<blockquote>
+<p>df['Rating_int'] = df['Rating'].round(0).astype(int)
+df[['Rating_int','Rating']].head()</p>
+</blockquote>
+<p>To change string values in a column, several commands are available. Common tasks include changing string values to upper or lower case, counting word length, or finding the beginning of a word.</p>
+<p>String Replacer</p>
+<blockquote>
+<p>df['Title'].replace('Prometheus', 'Alien')
+df[df.Title == 'Prometheus']</p>
+</blockquote>
+<h5>String Manipulation</h5>
+<p>Lower cases</p>
+<blockquote>
+<p>df['Title2'] = df['Title'].str.lower()
+df[['Title2','Title']].head()</p>
+</blockquote>
+<p>Upper cases</p>
+<blockquote>
+<p>df['Title2'] = df['Title'].str.upper()
+df[['Title2','Title']].head()</p>
+</blockquote>
+<p>Length of words</p>
+<blockquote>
+<p>df['Title2'] = df['Title'].str.len()
+df[['Title2','Title']].head()</p>
+</blockquote>
+<p>First word</p>
+<blockquote>
+<p>df['Title2'] = df['Title'].str.split(' ').str[0]
+df[['Title2','Title']].head()</p>
+</blockquote>
+<p>Find the word &quot;Squad&quot; in Title</p>
+<blockquote>
+<p>df['Title2'] = df['Title'].str.find('Squad', 0)
+df[['Title2','Title']].head()</p>
+</blockquote>
+<p>Without going into the many possibilities of date manipulation here, we will refer only to the conversion of string values into date values, as this is one of the most common tasks.</p>
+<p>Date manipulation</p>
+<blockquote>
+<p>pd.to_datetime('2010/11/12')</p>
+</blockquote>
+<p>Sorting of a column is possible by one or more values at the same time.</p>
+<p>Sort</p>
+<blockquote>
+<p>df.sort_values(by='Title', ascending=True)
+df.sort_values(by=['Director','Year'], ascending=True)</p>
+</blockquote>
+<h4>Row manipulation</h4>
+<p>As for the manipulation of columns, there are certain basic tasks to be done for the manipulation of rows.
+Filtering rows can be done in different way. The following image shows how you can filter rows by their content. Normally you want to filter by name or by range of values.</p>
+<h5>Row Filter</h5>
+<p>Select Title 'Prometheus'</p>
+<blockquote>
+<p>df[df.Title == 'Prometheus']</p>
+</blockquote>
+<p>Select Rating greater or equal 8.5</p>
+<blockquote>
+<p>df[df.Rating &gt;= 8.5]</p>
+</blockquote>
+<p>Select Year equal 2016 and Rating greater or equal 8.5</p>
+<blockquote>
+<p>df[(df.Year == 2016) &amp; (df.Rating &gt;= 8.5)]</p>
+</blockquote>
+<p>Select Title with 'Prometheus','Sing', 'Guardians of the Galaxy'</p>
+<blockquote>
+<p>titel = ['Prometheus','Sing', 'Guardians of the Galaxy']
+df[df.Title.isin(titel)]</p>
+</blockquote>
+<p>Select years in 2010,2015,002</p>
+<blockquote>
+<p>years = [2010,2015,2002]
+df[df.Year.isin(years)]</p>
+</blockquote>
+<p>Selects rows 1-to-3</p>
+<blockquote>
+<p>df.iloc[0:3]</p>
+</blockquote>
+<p>First 4 rows and first 2 columns</p>
+<blockquote>
+<p>df.iloc[0:4, 0:2]</p>
+</blockquote>
+<h4>Table Manipulation</h4>
+<h5>Group By</h5>
+<p>The Group By statement groups rows that have the same values into summary rows, like &quot;find the number of titles for each year&quot;.</p>
+<p><img src="img/groupby.png" alt="Group By" /></p>
+<p>The Group By statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns. Here are a few examples:</p>
+<p>Number of titles per year</p>
+<blockquote>
+<p>df.groupby(&quot;Year&quot;)[&quot;Title&quot;].count().to_frame()</p>
+</blockquote>
+<p>Number of titles per year and per director</p>
+<blockquote>
+<p>df.groupby([&quot;Year&quot;,&quot;Director&quot;])[&quot;Title&quot;].count().to_frame().reset_index()</p>
+</blockquote>
+<p>Number of titles per director</p>
+<blockquote>
+<p>df.groupby([&quot;Director&quot;])[&quot;Title&quot;].count().to_frame(name = 'count').reset_index()</p>
+</blockquote>
+<p>Total revenue per year and per director</p>
+<blockquote>
+<p>df.groupby([&quot;Year&quot;,&quot;Director&quot;])[&quot;Revenue (Millions)&quot;].sum().to_frame().reset_index()</p>
+</blockquote>
+<p>Rating-Mean per director</p>
+<blockquote>
+<p>df.groupby(&quot;Director&quot;)[&quot;Rating&quot;].mean().to_frame().reset_index()</p>
+</blockquote>
+<p>Combination of different group by functions</p>
+<blockquote>
+<p>df.groupby([&quot;Year&quot;,&quot;Director&quot;]).agg(
+{
+'Title':&quot;count&quot;,  # number of titles per year and director
+'Rating':&quot;mean&quot;,  # Rating-Mean per director
+'Revenue (Millions)': &quot;sum&quot;  # Total revenue per year and director
+}
+).reset_index()</p>
+</blockquote>
+<h5>Pivot / Unpivot</h5>
+<p>Pivot tables in Excel are probably familiar to most people. Pandas provides a similar function called pivot_table.</p>
+<p><img src="img/pivot.png" alt="Pivot" /></p>
+<p>The following example shows how the pivot function over the &quot;Director&quot; column summarizes all other columns as mean values.</p>
+<p>Pivot over Director and mean over all other columns</p>
+<blockquote>
+<p>pd.pivot_table(df,index=[&quot;Director&quot;]).reset_index()</p>
+</blockquote>
+<p><img src="img/pivot_01.png" alt="Pivot" /></p>
+<p>If you want to summarize explicitly using sums, you must add the parameter &quot;aggfunc=sum&quot;.</p>
+<p>Pivot with sum</p>
+<blockquote>
+<p>df_rev_sum = pd.pivot_table(df,index=[&quot;Director&quot;,&quot;Year&quot;],values=[&quot;Revenue (Millions)&quot;],aggfunc=np.sum).reset_index()
+df_rev_sum</p>
+</blockquote>
+<p><img src="img/pivot_02.png" alt="Pivot" /></p>
+<p>Another possibility, similar to the transpose function in Excel, is to unpivot the data. Here we unpivot the years over the rating and for each year a column with the mean value of the rating is displayed.</p>
+<p>Unpivot over years</p>
+<blockquote>
+<p>df_rating = pd.pivot_table(df,values=['Rating'], columns=['Year']).reset_index()
+df_rating</p>
+</blockquote>
+<p><img src="img/pivot_03.png" alt="Pivot" /></p>
+<blockquote>
+<p>df4.melt(id_vars=['index'],var_name='Year',value_name='Title')</p>
+</blockquote>
+<h5>Join</h5>
+<p>The join function is one of the most important operation in data engineering.
+Understanding the following concept in the figure below is crucial to applying the join function.</p>
+<p><img src="img/join.png" alt="Join" /></p>
+<p>Visual programming tools are better suited for this process. However, since we want to do this in Jupyter-Notebook, we will first create two data frames.
+We create first a dataframe with all movie directors and the number of their movies.</p>
+<p>Create new dataframe &quot;df_dir_movies&quot;</p>
+<blockquote>
+<p>df_dir_movies = df.groupby([&quot;Director&quot;])[&quot;Title&quot;].count().to_frame(name = 'number of movies').reset_index()
+df_dir_movies</p>
+</blockquote>
+<p><img src="img/join_01.png" alt="Join1" /></p>
+<p>Then we create the second data frame with the directors and the total revenue generated for all their movies.</p>
+<p>Create new dataframe &quot;df_dir_rev&quot;</p>
+<blockquote>
+<p>df_dir_rev = df.groupby([&quot;Director&quot;])[&quot;Revenue (Millions)&quot;].sum().to_frame(name = 'Revenue').reset_index()
+df_dir_rev</p>
+</blockquote>
+<p><img src="img/join_02.png" alt="Join2" /></p>
+<p>Now we join the two data frames together using the &quot;director&quot; column.
+There is an option to make the following joins using the &quot;how&quot; parameter:</p>
+<ul>
+<li>left</li>
+<li>right</li>
+<li>inner</li>
+<li>outer
+The resulting dataframe shows the directors with their number of movies and the total generated revenues in a table.</li>
+</ul>
+<p>Join the dataframe &quot;df_dir_movies&quot; with &quot;df_dir_rev&quot;</p>
+<p>how = rigtht, left, inner or outer</p>
+<blockquote>
+<p>pd.merge(df_dir_movies,df_dir_rev, left_on=['Director'], right_on=['Director'],how = 'left')</p>
+</blockquote>
+<p><img src="img/join_03.png" alt="Join3" /></p>
+<h5>Concatenate</h5>
+<p>Combining or appending two different dataframes can be done with the following two functions. It is important that the columns in both data frames are the same.</p>
+<blockquote>
+<p>df2 = df
+df.append(df2) # Append df2 to df (The columns must be the same in both dataframes)
+pd.concat([df, df2],axis=0) # concatenate two dataframes</p>
+</blockquote>
+<h3>Import Data from Databases</h3>
+<h4>Import from mysql</h4>
+<blockquote>
+<p>import pymysql</p>
+<p>conn = pymysql.connect(host='localhost',port=3306, db='database',user='root',password='pw')</p>
+<p>df = pd.read_sql_query(
+&quot;SELECT * FROM table LIMIT 3;&quot;,
+conn)
+df.tail(100)</p>
+</blockquote>
+<h4>Import Teradata</h4>
+<blockquote>
+<p>import teradata</p>
+</blockquote>
+<p>Make a connection</p>
+<blockquote>
+<p>session = udaExec.connect(method=&quot;odbc&quot;,
+USEREGIONALSETTINGS=&quot;N&quot;,
+system= &quot;dwh&quot;,
+username = &quot;root&quot;,
+password = &quot;pw&quot;);</p>
+<p>query = &quot;SELECT * FROM DATABASEX.TABLENAMEX&quot;</p>
+</blockquote>
+<p>Reading query to df</p>
+<blockquote>
+<p>df = pd.read_sql(query,session)</p>
+</blockquote>
+<p>Do something with df,e.g.</p>
+<blockquote>
+<p>print(df.head()) #to see the first 5 rows</p>
+</blockquote>
+<h4>Import SAP-Hana</h4>
+<blockquote>
+<p>import pyhdb</p>
+<p>connection = pyhdb.connect(
+host=&quot;localhost&quot;,
+port=30015,
+user=&quot;root,
+password=&quot;pw&quot;
+)
+print(connection.isconnected())
+query = &quot;SELECT * FROM HDB_REPORT.&quot;Table&quot;&quot;
+df = pd.read_sql(query,connection)</p>
+</blockquote>
+<p>Do something with df,e.g.</p>
+<blockquote>
+<p>print(df.head()) #to see the first 5 rows</p>
+</blockquote>
+<h2>Conclusion</h2>
+<p>With this Cheat Sheet you should be well prepared to perform most of the Data Enginnering tasks with Pandas in Jupyter-Notebook.
+This will also make it easier to integrate code you write in Python into KNIME and benefit from the advantages of both worlds.</p>
+</body></html>
